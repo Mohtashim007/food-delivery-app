@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import loginSignupImage from "../asserts/login-animation.gif";
 import { BiShow, BiHide } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
-import { ImagetoBase64 } from "../utility/ImagetoBase64";
 import { toast } from "react-hot-toast";
 
 function Login() {
@@ -32,7 +31,7 @@ function Login() {
     const { email, password } = data;
     if (email && password) {
       const fetchData = await fetch(
-        `${process.env.REACT_APP_SERVER_DOMIN}/login`,
+        `${process.env.REACT_APP_SERVER_DOMAIN}/login`,
         {
           method: "POST",
           headers: {
@@ -43,18 +42,17 @@ function Login() {
       );
 
       const dataRes = await fetchData.json();
-      console.log(dataRes);
 
       toast(dataRes.message);
 
-      //   if (dataRes.alert) {
-      //     dispatch(loginRedux(dataRes));
-      //     setTimeout(() => {
-      //       navigate("/");
-      //     }, 1000);
-      //   }
+      if (dataRes.alert) {
+        // dispatch(loginRedux(dataRes));
+        setTimeout(() => {
+          navigate("/");
+        }, 500);
+      }
     } else {
-      alert("Please Enter required fields");
+      toast("Please Enter required fields");
     }
   };
 

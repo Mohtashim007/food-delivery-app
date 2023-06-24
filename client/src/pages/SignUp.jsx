@@ -61,17 +61,17 @@ function SignUp() {
           }
         );
 
-        // const dataRes = await fetch.json();
+        const dataRes = await fetchData.json();
 
-        // toast(dataRes.message);
-        // if (dataRes.alert) {
+        toast(dataRes.message);
+        if (dataRes.alert) {
           navigate("/login");
-        // }
+        }
       } else {
-        alert("Password and Confirm Password Should be Same");
+        toast("Password and Confirm Password Should be Same");
       }
     } else {
-      alert("Please Enter Required Fields");
+      toast("Please Enter Required Fields");
     }
   };
 
