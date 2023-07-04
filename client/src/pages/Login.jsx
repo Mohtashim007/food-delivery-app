@@ -3,6 +3,8 @@ import loginSignupImage from "../asserts/login-animation.gif";
 import { BiShow, BiHide } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { loginRedux } from "../redux/userSlice";
 
 function Login() {
   const navigate = useNavigate();
@@ -11,6 +13,9 @@ function Login() {
     email: "",
     password: "",
   });
+
+  // const userData = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   const handleShowPassword = () => {
     setShowPassword((preve) => !preve);
@@ -46,7 +51,7 @@ function Login() {
       toast(dataRes.message);
 
       if (dataRes.alert) {
-        // dispatch(loginRedux(dataRes));
+        dispatch(loginRedux(dataRes));
         setTimeout(() => {
           navigate("/");
         }, 500);
